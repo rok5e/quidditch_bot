@@ -45,3 +45,22 @@ bot.onText(/\/lumos/, (msg) => {
   const chatId = msg.chat.id;
   bot.sendMessage(chatId, ':candle:!');
 });
+
+// Start the Express server
+app.get('/', (req, res) => {
+  res.send('Bot is running...');
+});
+
+// Health check endpoint to prevent Render from shutting down the service
+app.get('/health', (req, res) => {
+  res.status(200).send('Healthy');
+});
+
+app.listen(port, () => {
+  console.log('Web server is listening on port ${port}');
+});
+
+// Error handling
+bot.on('polling_error', (error) => {
+  console.error('Polling error:', error);
+});
