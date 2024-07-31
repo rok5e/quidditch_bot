@@ -11,6 +11,9 @@ const token = process.env.TELEGRAM_BOT_TOKEN;
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: true });
 
+// In-memory store to track users
+const userMessages = new Set();
+
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
   const messageText = msg.text.toLowerCase();
