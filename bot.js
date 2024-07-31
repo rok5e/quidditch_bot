@@ -2,7 +2,8 @@ const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 
 const app = express();
-const port = process.env.PORT || 3000; // Use the port provided by Render or default to 3000
+const port = process.env.PORT || 10000; // Use the port provided by Render or default to 3000
+console.log(`Using port: ${port}`);
 
 // Telegram bot token
 const token = process.env.TELEGRAM_BOT_TOKEN;
