@@ -66,7 +66,7 @@ bot.onText(/\/help/, (msg) => {
   bot.sendMessage(chatId, 'These are the spells you can use:\n/start - Bring me to life\n/help - Retrieve your list of spells\n/avadakedavra - Try to kill me\n/lumos - light a candle\n/acciosnitch - Call the Snitch to play Quidditch');
 });
 
-// Handle /avada kedavra command
+// Handle /avadakedavra command
 bot.onText(/\/avadakedavra/, (msg) => {
   const chatId = msg.chat.id;
   bot.sendMessage(chatId, 'Ha! That doesn\'t affect me puny human! 💀');
@@ -78,7 +78,7 @@ bot.onText(/\/lumos/, (msg) => {
   bot.sendMessage(chatId, '🕯');
 });
 
-// Handle /accio snitch command
+// Handle /acciosnitch command
 bot.onText(/\/acciosnitch/, (msg) => {
   const chatId = msg.chat.id;
   const options = {
@@ -123,19 +123,19 @@ const messageText = 'Congratulations on finding the Quidditch pitch! ✨\n\nRead
 const inlineKeyboard = {
     reply_markup: {
         inline_keyboard: [
-		  [
-            {
-				text: '✨ Play ✨',
-				web_app: { url: 'https://quidditch-mini-app.onrender.com' }
-			}
-		  ]
+			[
+				{
+					text: '✨ Play ✨',
+					web_app: { url: 'https://quidditch-mini-app.onrender.com' }
+				}
+			]
         ]
     }
 };
 // Send the photo with the message and inline keyboard
 bot.sendPhoto(channelId, imagePath, {
     caption: messageText,
-    ...inlineKeyboard
+    reply_markup: inlineKeyboard.reply_markup
 }).then((sentMessage) => {
     // Pin the sent message
     const messageId = sentMessage.message_id;
