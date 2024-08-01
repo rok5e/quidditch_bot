@@ -84,10 +84,12 @@ bot.onText(/\/acciosnitch/, (msg) => {
   const options = {
       reply_markup: {
         inline_keyboard: [
+		  [
             {
 				text: '✨ Play ✨',
 				web_app: { url: 'https://quidditch-mini-app.onrender.com' }
 			}
+		  ]
         ]
       }
     };
@@ -121,10 +123,12 @@ const messageText = 'Congratulations on finding the Quidditch pitch! ✨\n\nRead
 const inlineKeyboard = {
     reply_markup: {
         inline_keyboard: [
+		  [
             {
 				text: '✨ Play ✨',
 				web_app: { url: 'https://quidditch-mini-app.onrender.com' }
 			}
+		  ]
         ]
     }
 };
