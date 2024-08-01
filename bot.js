@@ -28,7 +28,10 @@ bot.on('message', (msg) => {
         inline_keyboard: [
           [
             { text: '☄️ Join the Quidditch Channel ☄️', url: 'https://t.me/catch_the_snitch' },
-            { text: '✨ Catch the Snitch! ✨', url: 'https://quidditch-mini-app.onrender.com' }
+            {
+				text: '✨ Catch the Snitch! ✨',
+				web_app: { url: 'https://quidditch-mini-app.onrender.com' }
+			}
           ]
         ]
       }
@@ -46,7 +49,10 @@ bot.onText(/\/start/, (msg) => {
         inline_keyboard: [
           [
             { text: '☄️ Join the Quidditch Channel ☄️', url: 'https://t.me/catch_the_snitch' },
-            { text: '✨ Catch the Snitch! ✨', url: 'https://quidditch-mini-app.onrender.com' }
+            {
+				text: '✨ Catch the Snitch! ✨',
+				web_app: { url: 'https://quidditch-mini-app.onrender.com' }
+			}
           ]
         ]
       }
@@ -57,7 +63,7 @@ bot.onText(/\/start/, (msg) => {
 // Handle /help command
 bot.onText(/\/help/, (msg) => {
   const chatId = msg.chat.id;
-  bot.sendMessage(chatId, 'These are the spells you can use:\n/start - Bring me to life\n/help - Retrieve your list of spells\n/avadakedavra - Try to kill me\n/lumos - light a candle\n/acciosnitch - Call the snitch to play Quidditch');
+  bot.sendMessage(chatId, 'These are the spells you can use:\n/start - Bring me to life\n/help - Retrieve your list of spells\n/avadakedavra - Try to kill me\n/lumos - light a candle\n/acciosnitch - Call the Snitch to play Quidditch');
 });
 
 // Handle /avada kedavra command
@@ -79,7 +85,10 @@ bot.onText(/\/acciosnitch/, (msg) => {
       reply_markup: {
         inline_keyboard: [
           [
-            { text: '✨ Play ✨', url: 'https://example.com/your_game' }
+            {
+				text: '✨ Play ✨',
+				web_app: { url: 'https://quidditch-mini-app.onrender.com' }
+			}
           ]
         ]
       }
@@ -115,8 +124,8 @@ const inlineKeyboard = {
     reply_markup: {
         inline_keyboard: [[
             {
-                text: '✨ Play ✨',
-                url: 'https://quidditch-mini-app.onrender.com'
+				text: '✨ Play ✨',
+				web_app: { url: 'https://quidditch-mini-app.onrender.com' 
             }
         ]]
     }
