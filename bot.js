@@ -84,12 +84,10 @@ bot.onText(/\/acciosnitch/, (msg) => {
   const options = {
       reply_markup: {
         inline_keyboard: [
-          [
             {
 				text: '✨ Play ✨',
 				web_app: { url: 'https://quidditch-mini-app.onrender.com' }
 			}
-          ]
         ]
       }
     };
@@ -122,12 +120,12 @@ const messageText = 'Congratulations on finding the Quidditch pitch! ✨\n\nRead
 // Inline keyboard button
 const inlineKeyboard = {
     reply_markup: {
-        inline_keyboard: [[
+        inline_keyboard: [
             {
 				text: '✨ Play ✨',
-				web_app: { url: 'https://quidditch-mini-app.onrender.com' 
-            }
-        ]]
+				web_app: { url: 'https://quidditch-mini-app.onrender.com' }
+			}
+        ]
     }
 };
 // Send the photo with the message and inline keyboard
