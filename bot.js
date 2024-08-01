@@ -18,7 +18,6 @@ const userMessages = new Set();
 const commands = ['/start', '/help', '/avadakedavra', '/lumos', '/acciosnitch'];
 
 bot.on('message', (msg) => {
-  console.log(msg);
   const chatId = msg.chat.id;
   const messageText = msg.text.toLowerCase();
   
@@ -62,7 +61,7 @@ bot.onText(/\/help/, (msg) => {
 });
 
 // Handle /avada kedavra command
-bot.onText(/\/avada\skedavra/, (msg) => {
+bot.onText(/\/avadakedavra/, (msg) => {
   const chatId = msg.chat.id;
   bot.sendMessage(chatId, 'Ha! That doesn\'t affect me puny human! 💀');
 });
@@ -74,7 +73,7 @@ bot.onText(/\/lumos/, (msg) => {
 });
 
 // Handle /accio snitch command
-bot.onText(/\/accio\ssnitch/, (msg) => {
+bot.onText(/\/acciosnitch/, (msg) => {
   const chatId = msg.chat.id;
   const options = {
       reply_markup: {
@@ -108,34 +107,34 @@ bot.on('polling_error', (error) => {
 });
 
 // Send a single message to the Channel:
-//const channelId = '@
-//const imagePath = 'https://wallpapers.com/downloads/high/the-hogwarts-quidditch-pitch-1280-x-720-wallpaper-r1th6w82zxi1rhy1.webp'; // path to the image
-//const messageText = 'Congratulations on finding the Quidditch pitch! ✨\n\nReady to catch the Snitch?';
+const channelId = '@catch_the_snitch';
+const imagePath = 'https://wallpapers.com/downloads/high/the-hogwarts-quidditch-pitch-1280-x-720-wallpaper-r1th6w82zxi1rhy1.webp'; // path to the image
+const messageText = 'Congratulations on finding the Quidditch pitch! ✨\n\nReady to catch the Snitch?';
 // Inline keyboard button
-//const inlineKeyboard = {
-//    reply_markup: {
-//        inline_keyboard: [[
-//            {
-//                text: '✨ Play ✨',
-//                url: 'https://example.com'
-//            }
-//        ]]
-//    }
-//};
+const inlineKeyboard = {
+    reply_markup: {
+        inline_keyboard: [[
+            {
+                text: '✨ Play ✨',
+                url: 'https://example.com'
+            }
+        ]]
+    }
+};
 // Send the photo with the message and inline keyboard
-//bot.sendPhoto(channelId, imagePath, {
-//    caption: messageText,
-//    ...inlineKeyboard
-//}).then((sentMessage) => {
+bot.sendPhoto(channelId, imagePath, {
+    caption: messageText,
+    ...inlineKeyboard
+}).then((sentMessage) => {
     // Pin the sent message
-//    const messageId = sentMessage.message_id;
-//    bot.pinChatMessage(channelId, messageId)
-//        .then(() => {
-//            console.log('Message pinned successfully');
-//        })
-//        .catch((error) => {
-//            console.error('Error pinning message:', error);
-//        });
-//}).catch((error) => {
-//    console.error('Error sending message:', error);
-//});
+    const messageId = sentMessage.message_id;
+    bot.pinChatMessage(channelId, messageId)
+        .then(() => {
+            console.log('Message pinned successfully');
+        })
+        .catch((error) => {
+            console.error('Error pinning message:', error);
+        });
+}).catch((error) => {
+    console.error('Error sending message:', error);
+});
