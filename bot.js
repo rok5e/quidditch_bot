@@ -28,7 +28,7 @@ bot.on('message', (msg) => {
         inline_keyboard: [
           [
             { text: '☄️ Join the Quidditch Channel ☄️', url: 'https://t.me/catch_the_snitch' },
-            { text: '✨ Catch the Snitch! ✨', url: 'https://example.com/your_game' }
+            { text: '✨ Catch the Snitch! ✨', url: 'https://quidditch-mini-app.onrender.com' }
           ]
         ]
       }
@@ -46,7 +46,7 @@ bot.onText(/\/start/, (msg) => {
         inline_keyboard: [
           [
             { text: '☄️ Join the Quidditch Channel ☄️', url: 'https://t.me/catch_the_snitch' },
-            { text: '✨ Catch the Snitch! ✨', url: 'https://example.com/your_game' }
+            { text: '✨ Catch the Snitch! ✨', url: 'https://quidditch-mini-app.onrender.com' }
           ]
         ]
       }
@@ -116,7 +116,7 @@ const inlineKeyboard = {
         inline_keyboard: [[
             {
                 text: '✨ Play ✨',
-                url: 'https://example.com'
+                url: 'https://quidditch-mini-app.onrender.com'
             }
         ]]
     }
