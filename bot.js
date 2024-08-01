@@ -112,13 +112,14 @@ app.listen(port, () => {
 
 // Error handling
 bot.on('polling_error', (error) => {
-  console.error('Polling error:', error);
+  //console.error('Polling error:', error);
 });
 
 // Send a single message to the Channel:
 const channelId = '@catch_the_snitch';
 const imagePath = 'https://wallpapers.com/downloads/high/the-hogwarts-quidditch-pitch-1280-x-720-wallpaper-r1th6w82zxi1rhy1.webp'; // Path to the image
 const messageText = 'Congratulations on finding the Quidditch pitch! ✨\n\nReady to catch the Snitch?';
+console.log('channel ID, image URL and message text set successfully');
 
 // Inline keyboard button
 const inlineKeyboard = {
@@ -130,6 +131,7 @@ const inlineKeyboard = {
     ]
   }
 };
+console.log('inline keyboard button set successfully');
 
 // Send the photo with the message and inline keyboard
 bot.sendPhoto(channelId, imagePath, {
