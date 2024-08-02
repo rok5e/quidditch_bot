@@ -145,8 +145,10 @@ bot.sendPhoto(channelId, imagePath, {
       console.log('Message pinned successfully');
     })
     .catch((error) => {
-      console.error('Error pinning message:', error);
+      //console.error('Error pinning message:', error);
+	  console.log('Error pinning message');
     });
 }).catch((error) => {
-  console.error('Error sending message:', error);
+  //console.error('Error sending message:', error);
+  console.log('Error sending message');
 });
