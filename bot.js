@@ -1,6 +1,5 @@
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
-const fs = require('fs');
 
 const app = express(); // Express isn't required for a Telegram bot, but I added it so Render stopped whining about the missing port.
 const port = process.env.PORT || 10000;
@@ -117,40 +116,38 @@ bot.on('polling_error', (error) => {
 });
 
 // Send a single message to the Channel:
-const channelId = '@catch_the_snitch';
-const imagePath = 'https://wallpapers.com/downloads/high/the-hogwarts-quidditch-pitch-1280-x-720-wallpaper-r1th6w82zxi1rhy1.webp'; // Path to the image
-const messageText = 'Congratulations on finding the Quidditch pitch! ✨\n\nReady to catch the Snitch?';
-console.log('channel ID, image URL and message text set successfully');
+//const channelId = '@catch_the_snitch';
+//const imagePath = 'https://wallpapers.com/downloads/high/the-hogwarts-quidditch-pitch-1280-x-720-wallpaper-r1th6w82zxi1rhy1.webp'; // Path to the image
+//const messageText = 'Congratulations on finding the Quidditch pitch! ✨\n\nReady to catch the Snitch?';
 
 // Inline keyboard button
-const inlineKeyboard = {
-    reply_markup: {
-      inline_keyboard: [
-        [
-          {
-            text: '✨ Play ✨',
-            web_app: { url: 'https://quidditch-mini-app.onrender.com' }
-          }
-        ]
-      ]
-    }
-  };
-console.log('inline keyboard button set successfully');
+//const inlineKeyboard = {
+//    reply_markup: {
+//      inline_keyboard: [
+//        [
+//          {
+//            text: '✨ Play ✨',
+//            url: 'https://quidditch-mini-app.onrender.com'
+//          }
+//        ]
+//      ]
+//    }
+//  };
 
 // Send the photo with the message and inline keyboard
-bot.sendPhoto(channelId, imagePath, {
-  caption: messageText,
-  ...inlineKeyboard
-}).then((sentMessage) => {
+//bot.sendPhoto(channelId, imagePath, {
+//  caption: messageText,
+//  ...inlineKeyboard
+//}).then((sentMessage) => {
   // Pin the sent message
-  const messageId = sentMessage.message_id;
-  bot.pinChatMessage(channelId, messageId)
-    .then(() => {
-      console.log('Message pinned successfully');
-    })
-    .catch((error) => {
-      console.error('Error pinning message:', error);
-    });
-}).catch((error) => {
-  console.error('Error sending message:', error.response.body);
-});
+//  const messageId = sentMessage.message_id;
+//  bot.pinChatMessage(channelId, messageId)
+//    .then(() => {
+//      console.log('Message pinned successfully');
+//    })
+//    .catch((error) => {
+//      console.error('Error pinning message:', error);
+//    });
+//}).catch((error) => {
+//  console.error('Error sending message:', error.response.body);
+//});
