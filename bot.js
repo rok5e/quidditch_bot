@@ -2,7 +2,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 
 const app = express(); // Express isn't required for a Telegram bot, but I added it so Render stopped whining about the missing port.
-const port = process.env.PORT || 10000; // Use the port provided by Render or default to 3000
+const port = process.env.PORT || 10000;
 console.log(`Using port: ${port}`);
 
 // Telegram bot token
@@ -23,15 +23,15 @@ bot.on('message', (msg) => {
   
   // Check if it's the user's first message and it's not a valid command
   if (!userMessages.has(chatId) && !commands.includes(messageText)) {
-	const options = {
+    const options = {
       reply_markup: {
         inline_keyboard: [
           [
             { text: '☄️ Join the Quidditch Channel ☄️', url: 'https://t.me/catch_the_snitch' },
             {
-				text: '✨ Catch the Snitch! ✨',
-				web_app: { url: 'https://quidditch-mini-app.onrender.com' }
-			}
+              text: '✨ Catch the Snitch! ✨',
+              web_app: { url: 'https://quidditch-mini-app.onrender.com' }
+            }
           ]
         ]
       }
@@ -45,18 +45,18 @@ bot.on('message', (msg) => {
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
   const options = {
-      reply_markup: {
-        inline_keyboard: [
-          [
-            { text: '☄️ Join the Quidditch Channel ☄️', url: 'https://t.me/catch_the_snitch' },
-            {
-				text: '✨ Catch the Snitch! ✨',
-				web_app: { url: 'https://quidditch-mini-app.onrender.com' }
-			}
-          ]
+    reply_markup: {
+      inline_keyboard: [
+        [
+          { text: '☄️ Join the Quidditch Channel ☄️', url: 'https://t.me/catch_the_snitch' },
+          {
+            text: '✨ Catch the Snitch! ✨',
+            web_app: { url: 'https://quidditch-mini-app.onrender.com' }
+          }
         ]
-      }
-    };
+      ]
+    }
+  };
   bot.sendMessage(chatId, 'Crucio! 💥 Just kidding :)\nHow can I enchant you? 🧙‍♂️', options);
 });
 
@@ -82,17 +82,17 @@ bot.onText(/\/lumos/, (msg) => {
 bot.onText(/\/acciosnitch/, (msg) => {
   const chatId = msg.chat.id;
   const options = {
-      reply_markup: {
-        inline_keyboard: [
-		  [
-            {
-				text: '✨ Play ✨',
-				web_app: { url: 'https://quidditch-mini-app.onrender.com' }
-			}
-		  ]
+    reply_markup: {
+      inline_keyboard: [
+        [
+          {
+            text: '✨ Play ✨',
+            web_app: { url: 'https://quidditch-mini-app.onrender.com' }
+          }
         ]
-      }
-    };
+      ]
+    }
+  };
   bot.sendMessage(chatId, '🏆 You summoned the Snitch! Let\'s play Quidditch!', options);
 });
 
@@ -112,7 +112,7 @@ app.listen(port, () => {
 
 // Error handling
 bot.on('polling_error', (error) => {
-  //console.error('Polling error:', error);
+  console.error('Polling error:', error);
 });
 
 // Send a single message to the Channel:
@@ -148,5 +148,5 @@ bot.sendPhoto(channelId, imagePath, {
       console.error('Error pinning message:', error);
     });
 }).catch((error) => {
-  console.error('Error sending message:', error);
+  console.error('Error sending message:', error.response.body);
 });
