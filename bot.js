@@ -1,5 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
+const fs = require('fs');
 
 const app = express(); // Express isn't required for a Telegram bot, but I added it so Render stopped whining about the missing port.
 const port = process.env.PORT || 10000;
@@ -123,14 +124,17 @@ console.log('channel ID, image URL and message text set successfully');
 
 // Inline keyboard button
 const inlineKeyboard = {
-  reply_markup: {
-    inline_keyboard: [
-      [
-        { text: '✨ Play ✨', web_app: { url: 'https://quidditch-mini-app.onrender.com' } }
+    reply_markup: {
+      inline_keyboard: [
+        [
+          {
+            text: '✨ Play ✨',
+            web_app: { url: 'https://quidditch-mini-app.onrender.com' }
+          }
+        ]
       ]
-    ]
-  }
-};
+    }
+  };
 console.log('inline keyboard button set successfully');
 
 // Send the photo with the message and inline keyboard
