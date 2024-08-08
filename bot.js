@@ -16,7 +16,7 @@ const bot = new TelegramBot(token, { polling: true });
 const userMessages = new Set();
 
 // Define list of commands
-const commands = ['/start', '/help', '/avadakedavra', '/lumos', '/acciosnitch'];
+const commands = ['/start', '/help', '/avadakedavra', '/lumos', '/acciosnitch', '/pay'];
 
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
@@ -45,30 +45,63 @@ bot.on('message', (msg) => {
 // Command to send an invoice
 bot.onText(/\/pay/, (msg) => {
     const chatId = msg.chat.id;
-    
+	
+	const options = {
+        reply_markup: {
+            inline_keyboard: [
+                [
+                    { text: '20 EUR', callback_data: 'pay_20' },
+                    { text: '30 EUR', callback_data: 'pay_30' }
+                ]
+            ]
+        }
+    };
+
+    bot.sendMessage(chatId, 'How much money do you want to give me?', options);
+});
+
+// Handle callback queries to send the appropriate invoice
+bot.on('callback_query', (query) => {
+    const chatId = query.message.chat.id;
+    const data = query.data;
+
+    let amount, description;
+
+    if (data === 'pay_20') {
+        amount = 2000; // 20 EUR in cents
+        description = 'Give me your money! 🤑🤑';
+    } else if (data === 'pay_30') {
+        amount = 3000; // 30 EUR in cents
+        description = 'Give me your money! 🤑🤑';
+    } else {
+        return; // If data is not recognized, do nothing
+    }
+
+    const invoicePayload = `invoice_${amount}`; // Unique payload for this invoice
+
     bot.sendInvoice(
         chatId,
-        'Deposit', // Product title
-        'You really want to give me your money', // Product description
+        'Casino Deposit', // Product title
+        description, // Product description
         '0001-2024', // Unique payload for this invoice
         providerToken, // Your Stripe provider token
         'EUR', // Currency code (e.g., 'EUR' for Euro)
         [
             {
-                label: 'Product',
-                amount: 2000 // Amount in cents (20.00 EUR)
+                label: 'Deposit',
+                amount: amount // Amount in cents
             }
         ],
         {
-            need_name: true,
+            need_name: false,
             need_phone_number: false,
             need_email: false,
             is_flexible: false
         }
     ).then(() => {
-        console.log('Invoice sent successfully.');
+        console.log(`Invoice for ${amount / 100} EUR sent successfully.`);
     }).catch(err => {
-        console.error('Error sending invoice:', err);
+        console.error(`Error sending invoice for ${amount / 100} EUR:`, err);
     });
 });
 
@@ -79,7 +112,7 @@ bot.on('pre_checkout_query', (preCheckoutQuery) => {
 
 // Handle successful payments
 bot.on('successful_payment', (msg) => {
-    bot.sendMessage(msg.chat.id, `Haha, I got your ${msg.successful_payment.total_amount / 100} ${msg.successful_payment.currency}!`);
+    bot.sendMessage(msg.chat.id, `Haha, you'll never get your ${msg.successful_payment.total_amount / 100} ${msg.successful_payment.currency} back!`);
 });
 
 // Handle /start command
