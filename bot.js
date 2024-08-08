@@ -7,6 +7,7 @@ console.log(`Using port: ${port}`);
 
 // Telegram bot token
 const token = process.env.TELEGRAM_BOT_TOKEN;
+const providerToken = '284685063:TEST:OTMyZjU4NjI5MTkz';
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: true });
@@ -39,6 +40,46 @@ bot.on('message', (msg) => {
     bot.sendMessage(chatId, 'Crucio! 💥 Just kidding :)\nHow can I enchant you? 🧙‍♂️', options);
     userMessages.add(chatId);
   }
+});
+
+// Command to send an invoice
+bot.onText(/\/pay/, (msg) => {
+    const chatId = msg.chat.id;
+    
+    bot.sendInvoice(
+        chatId,
+        'Deposit', // Product title
+        'You really want to give me your money', // Product description
+        '0001-2024', // Unique payload for this invoice
+        providerToken, // Your Stripe provider token
+        'EUR', // Currency code (e.g., 'EUR' for Euro)
+        [
+            {
+                label: 'Product',
+                amount: 2000 // Amount in cents (20.00 EUR)
+            }
+        ],
+        {
+            need_name: true,
+            need_phone_number: false,
+            need_email: true,
+            is_flexible: false
+        }
+    ).then(() => {
+        console.log('Invoice sent successfully.');
+    }).catch(err => {
+        console.error('Error sending invoice:', err);
+    });
+});
+
+// Handle pre-checkout queries
+bot.on('pre_checkout_query', (preCheckoutQuery) => {
+    bot.answerPreCheckoutQuery(preCheckoutQuery.id, true);
+});
+
+// Handle successful payments
+bot.on('successful_payment', (msg) => {
+    bot.sendMessage(msg.chat.id, `Haha, I got your ${msg.successful_payment.total_amount / 100} ${msg.successful_payment.currency}!`);
 });
 
 // Handle /start command
