@@ -20,7 +20,7 @@ const commands = ['/start', '/help', '/avadakedavra', '/lumos', '/acciosnitch'];
 
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
-  const messageText = msg.text.toLowerCase();
+  const messageText = msg.text ? msg.text.toLowerCase() : '';
   
   // Check if it's the user's first message and it's not a valid command
   if (!userMessages.has(chatId) && !commands.includes(messageText)) {
@@ -62,7 +62,7 @@ bot.onText(/\/pay/, (msg) => {
         {
             need_name: true,
             need_phone_number: false,
-            need_email: true,
+            need_email: false,
             is_flexible: false
         }
     ).then(() => {
