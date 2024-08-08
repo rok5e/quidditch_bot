@@ -19,26 +19,28 @@ const userMessages = new Set();
 const commands = ['/start', '/help', '/avadakedavra', '/lumos', '/acciosnitch', '/pay'];
 
 bot.on('message', (msg) => {
-  const chatId = msg.chat.id;
-  const messageText = msg.text ? msg.text.toLowerCase() : '';
-  
-  // Check if it's the user's first message and it's not a valid command
-  if (!userMessages.has(chatId) && !commands.includes(messageText)) {
-    const options = {
-      reply_markup: {
-        inline_keyboard: [
-          [
-            { text: '☄️ Join the Quidditch Channel ☄️', url: 'https://t.me/catch_the_snitch' },
-            {
-              text: '✨ Catch the Snitch! ✨',
-              web_app: { url: 'https://quidditch-mini-app.onrender.com' }
-            }
-          ]
-        ]
-      }
-    };
-    bot.sendMessage(chatId, 'Crucio! 💥 Just kidding :)\nHow can I enchant you? 🧙‍♂️', options);
-    userMessages.add(chatId);
+  if (msg.text && !msg.successful_payment) {
+	  const chatId = msg.chat.id;
+	  const messageText = msg.text ? msg.text.toLowerCase() : '';
+	  
+	  // Check if it's the user's first message and it's not a valid command
+	  if (!userMessages.has(chatId) && !commands.includes(messageText)) {
+		const options = {
+		  reply_markup: {
+			inline_keyboard: [
+			  [
+				{ text: '☄️ Join the Quidditch Channel ☄️', url: 'https://t.me/catch_the_snitch' },
+				{
+				  text: '✨ Catch the Snitch! ✨',
+				  web_app: { url: 'https://quidditch-mini-app.onrender.com' }
+				}
+			  ]
+			]
+		  }
+		};
+		bot.sendMessage(chatId, 'Crucio! 💥 Just kidding :)\nHow can I enchant you? 🧙‍♂️', options);
+		userMessages.add(chatId);
+	  }
   }
 });
 
