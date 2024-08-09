@@ -7,7 +7,7 @@ console.log(`Using port: ${port}`);
 
 // Telegram bot token
 const token = process.env.TELEGRAM_BOT_TOKEN;
-const providerToken = '284685063:TEST:OTMyZjU4NjI5MTkz';
+const providerToken = process.env.STRIPE_TEST_TOKEN;
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: true });
